@@ -1,0 +1,83 @@
+{
+  "data": [
+    {
+      "id": "aaaaaaaa-0001-4000-8000-000000000001",
+      "day": "2026-08-10",
+      "score": 82,
+      "active_calories": 410,
+      "total_calories": 2510,
+      "equivalent_walking_distance": 9800,
+      "high_activity_met_minutes": 12,
+      "high_activity_time": 720,
+      "medium_activity_met_minutes": 38,
+      "medium_activity_time": 2400,
+      "low_activity_met_minutes": 55,
+      "low_activity_time": 9600,
+      "sedentary_met_minutes": 20,
+      "sedentary_time": 30600,
+      "resting_time": 21600,
+      "non_wear_time": 0,
+      "inactivity_alerts": 1,
+      "average_met_minutes": 1.4,
+      "meters_to_target": 0,
+      "target_calories": 400,
+      "target_meters": 9000,
+      "steps": 8342,
+      "timestamp": "2026-08-10T04:00:00+00:00",
+      "class_5_min": "001233334555524001",
+      "met": {
+        "interval": 300.0,
+        "items": [1.1, 1.4, 2.0],
+        "timestamp": "2026-08-10T04:00:00+00:00"
+      },
+      "contributors": {
+        "meet_daily_targets": 88,
+        "move_every_hour": 90,
+        "recovery_time": 75,
+        "stay_active": 80,
+        "training_frequency": 70,
+        "training_volume": 65
+      }
+    },
+    {
+      "id": "aaaaaaaa-0001-4000-8000-000000000002",
+      "day": "2026-08-11",
+      "score": 74,
+      "active_calories": 260,
+      "total_calories": 2290,
+      "equivalent_walking_distance": 6100,
+      "high_activity_met_minutes": 4,
+      "high_activity_time": 180,
+      "medium_activity_met_minutes": 20,
+      "medium_activity_time": 1200,
+      "low_activity_met_minutes": 40,
+      "low_activity_time": 7200,
+      "sedentary_met_minutes": 28,
+      "sedentary_time": 41400,
+      "resting_time": 21600,
+      "non_wear_time": 0,
+      "inactivity_alerts": 3,
+      "average_met_minutes": 1.1,
+      "meters_to_target": 2100,
+      "target_calories": 400,
+      "target_meters": 9000,
+      "steps": 5210,
+      "timestamp": "2026-08-11T04:00:00+00:00",
+      "class_5_min": "000122233440000011",
+      "met": {
+        "interval": 300.0,
+        "items": [0.9, 1.1, 1.6],
+        "timestamp": "2026-08-11T04:00:00+00:00"
+      },
+      "contributors": {
+        "meet_daily_targets": 60,
+        "move_every_hour": 55,
+        "recovery_time": 70,
+        "stay_active": 58,
+        "training_frequency": 50,
+        "training_volume": 45
+      }
+    }
+  ],
+  "next_token": null
+}

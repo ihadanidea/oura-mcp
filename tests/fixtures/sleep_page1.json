@@ -1,0 +1,27 @@
+{
+  "data": [
+    {
+      "id": "dddddddd-0004-4000-8000-000000000001",
+      "day": "2026-08-10",
+      "type": "long_sleep",
+      "bedtime_start": "2026-08-09T23:14:02-07:00",
+      "bedtime_end": "2026-08-10T07:04:02-07:00",
+      "total_sleep_duration": 27000,
+      "time_in_bed": 28200,
+      "efficiency": 91,
+      "deep_sleep_duration": 5400,
+      "rem_sleep_duration": 6300,
+      "light_sleep_duration": 15300,
+      "awake_time": 1200,
+      "average_breath": 14.2,
+      "average_heart_rate": 54.0,
+      "lowest_heart_rate": 47,
+      "average_hrv": 42,
+      "latency": 600,
+      "restless_periods": 3,
+      "low_battery_alert": false,
+      "period": 0
+    }
+  ],
+  "next_token": "eyJwYWdlIjoxfQ=="
+}

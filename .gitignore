@@ -3,3 +3,14 @@
 
 # OS cruft
 .DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# Test/coverage artifacts
+.pytest_cache/
+.coverage
+htmlcov/

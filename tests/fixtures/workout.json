@@ -1,0 +1,29 @@
+{
+  "data": [
+    {
+      "id": "eeeeeeee-0005-4000-8000-000000000001",
+      "day": "2026-08-10",
+      "activity": "cycling",
+      "calories": 480.0,
+      "distance": 18500.0,
+      "start_datetime": "2026-08-10T17:02:00-07:00",
+      "end_datetime": "2026-08-10T18:11:00-07:00",
+      "intensity": "moderate",
+      "label": null,
+      "source": "autodetected"
+    },
+    {
+      "id": "eeeeeeee-0005-4000-8000-000000000002",
+      "day": "2026-08-11",
+      "activity": "strength_training",
+      "calories": 220.0,
+      "distance": null,
+      "start_datetime": "2026-08-11T07:15:00-07:00",
+      "end_datetime": "2026-08-11T07:55:00-07:00",
+      "intensity": "hard",
+      "label": "Upper body",
+      "source": "manual"
+    }
+  ],
+  "next_token": null
+}

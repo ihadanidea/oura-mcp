@@ -1,0 +1,27 @@
+{
+  "data": [
+    {
+      "id": "ffffffff-0006-4000-8000-000000000001",
+      "day": "2026-08-10",
+      "type": "meditation",
+      "mood": "good",
+      "motion_count": null,
+      "start_datetime": "2026-08-10T21:00:00-07:00",
+      "end_datetime": "2026-08-10T21:15:00-07:00",
+      "heart_rate": null,
+      "heart_rate_variability": null
+    },
+    {
+      "id": "ffffffff-0006-4000-8000-000000000002",
+      "day": "2026-08-11",
+      "type": "breathing",
+      "mood": "same",
+      "motion_count": null,
+      "start_datetime": "2026-08-11T08:00:00-07:00",
+      "end_datetime": "2026-08-11T08:10:00-07:00",
+      "heart_rate": null,
+      "heart_rate_variability": null
+    }
+  ],
+  "next_token": null
+}

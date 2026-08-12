@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "id": "33333333-0009-4000-8000-000000000001",
+      "tag_type_code": "illness",
+      "start_time": "2026-08-10T08:00:00",
+      "end_time": "2026-08-11T20:00:00",
+      "start_day": "2026-08-10",
+      "end_day": "2026-08-11",
+      "comment": "Mild cold, felt run down all day",
+      "custom_name": null
+    },
+    {
+      "id": "33333333-0009-4000-8000-000000000002",
+      "tag_type_code": "custom",
+      "start_time": "2026-08-11T19:30:00",
+      "end_time": null,
+      "start_day": "2026-08-11",
+      "end_day": null,
+      "comment": "One glass of wine with dinner",
+      "custom_name": "Alcohol"
+    }
+  ],
+  "next_token": null
+}

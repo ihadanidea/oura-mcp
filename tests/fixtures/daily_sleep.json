@@ -1,0 +1,35 @@
+{
+  "data": [
+    {
+      "id": "cccccccc-0003-4000-8000-000000000001",
+      "day": "2026-08-10",
+      "timestamp": "2026-08-10T04:00:00+00:00",
+      "score": 85,
+      "contributors": {
+        "deep_sleep": 90,
+        "efficiency": 92,
+        "latency": 80,
+        "rem_sleep": 75,
+        "restfulness": 70,
+        "timing": 88,
+        "total_sleep": 84
+      }
+    },
+    {
+      "id": "cccccccc-0003-4000-8000-000000000002",
+      "day": "2026-08-11",
+      "timestamp": "2026-08-11T04:00:00+00:00",
+      "score": 68,
+      "contributors": {
+        "deep_sleep": 60,
+        "efficiency": 75,
+        "latency": 55,
+        "rem_sleep": 65,
+        "restfulness": 58,
+        "timing": 70,
+        "total_sleep": 66
+      }
+    }
+  ],
+  "next_token": null
+}

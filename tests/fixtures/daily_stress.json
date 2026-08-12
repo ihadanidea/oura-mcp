@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "id": "11111111-0007-4000-8000-000000000001",
+      "day": "2026-08-10",
+      "stress_high": 5400,
+      "recovery_high": 9600,
+      "day_summary": "normal"
+    },
+    {
+      "id": "11111111-0007-4000-8000-000000000002",
+      "day": "2026-08-11",
+      "stress_high": 12600,
+      "recovery_high": 3600,
+      "day_summary": "stressful"
+    }
+  ],
+  "next_token": null
+}
