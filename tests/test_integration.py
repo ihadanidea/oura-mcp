@@ -259,6 +259,7 @@ def test_upstream_timeout_surfaces_explicitly(app):
 # by test_health_authenticated_reports_oura_connectivity above).
 @pytest.mark.docker
 @pytest.mark.slow
+@pytest.mark.timeout(420)  # image pull + pip install can take a while; overrides the global 15s
 def test_container_smoke_docker_compose_up():
     smoke_env = {
         "OURA_ACCESS_TOKEN": "smoke-test-oura-token",
