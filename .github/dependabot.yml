@@ -9,3 +9,9 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      # Pinned to 2.x deliberately (see Known Constraints in the code
+      # request / README): this is a behavior-preserving extraction of
+      # upstream's server, not a rewrite against a new major FastMCP API.
+      - dependency-name: "fastmcp"
+        update-types: ["version-update:semver-major"]
