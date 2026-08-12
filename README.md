@@ -173,15 +173,16 @@ unmocked HTTP call rather than letting it reach the network.
   fail-closed-on-unset-token, health endpoint behavior, and explicit error
   propagation on upstream 401/429/timeout (no silent failures).
 
-The container smoke test (`docker compose up` + one real `initialize`
-against `127.0.0.1:8000`) is marked `@pytest.mark.docker` and skipped by
-default — run it explicitly with `uv run pytest -m docker`. It was not run
-as part of this change: **Docker isn't installed on the machine this fork
-was built on.** The equivalent app-level behavior (auth-gated `/health`,
-path-token and Bearer auth, `initialize` handshake) was instead verified
-manually by running `uvicorn oura_mcp.server:app` directly and `curl`-ing it
-— see the change history for that session. Verify the container path itself
-before relying on it in production.
+The container smoke test (`test_container_smoke_docker_compose_up`: real
+`docker compose up`, poll `/health`, one real `initialize` against
+`127.0.0.1:8000`, and a check that the published port is loopback-only) is
+marked `@pytest.mark.docker` + `@pytest.mark.slow` and skipped by default —
+run it explicitly with `uv run pytest -m docker`. **Docker isn't installed
+on the machine this fork is normally developed on**, so this test can't run
+there; it instead runs on demand in CI via the `docker-smoke` job in
+[`.github/workflows/test.yml`](.github/workflows/test.yml)
+(`workflow_dispatch`, since GitHub-hosted runners ship Docker) —
+[verified passing](https://github.com/ihadanidea/oura-mcp/actions/runs/31646593930).
 
 ## Security posture
 
@@ -222,8 +223,6 @@ revoke it at cloud.ouraring.com and generate a new `MCP_AUTH_TOKEN`.
   upstream characteristic, carried over unchanged rather than fixed inline,
   per this fork's behavior-preserving-extraction scope. Worth a dedicated
   follow-up if `/health` latency ever matters under load.
-- **Container smoke test unverified on this machine** — see
-  [Testing](#testing) above.
 
 ## How it works
 
