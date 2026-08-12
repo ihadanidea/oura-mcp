@@ -144,6 +144,12 @@ uv sync
 uv run pytest
 ```
 
+Runs in CI on every push and PR to `main` via
+[`.github/workflows/test.yml`](.github/workflows/test.yml) (`uv sync --locked && uv run pytest`,
+Python 3.12 — matching the container's `python:3.12-slim`). The `docker`-marked
+container smoke test is excluded from the default run (see below) and does
+not run in CI.
+
 42 tests, ~99% coverage on `client.py`/`tools.py` (gate held at 98%). Every
 Oura API call is stubbed from synthetic fixtures in `tests/fixtures/`
 (generated against Oura's public OpenAPI spec, vendored as
@@ -209,9 +215,6 @@ revoke it at cloud.ouraring.com and generate a new `MCP_AUTH_TOKEN`.
 
 ## Known gaps / follow-ups
 
-- **CI pipeline.** Not set up in this change (kept out of scope to stay
-  reviewable) — running `uv run pytest` on push/PR is the natural next
-  step.
 - **`health()` blocks the event loop.** The handler is `async def` but
   calls synchronous `httpx` under the hood via `OuraClient` — a pre-existing
   upstream characteristic, carried over unchanged rather than fixed inline,
