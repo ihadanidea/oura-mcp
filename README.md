@@ -1,5 +1,7 @@
 # Oura Ring MCP Server
 
+[![Tests](https://github.com/ihadanidea/oura-mcp/actions/workflows/test.yml/badge.svg)](https://github.com/ihadanidea/oura-mcp/actions/workflows/test.yml)
+
 A self-hosted [MCP](https://modelcontextprotocol.io) server that exposes your
 Oura Ring data — daily activity, readiness, sleep, workouts, heart rate,
 stress, SpO2, sessions, and tags — to Claude (claude.ai connectors or Claude
