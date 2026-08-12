@@ -5,6 +5,7 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   test:
@@ -22,3 +23,24 @@ jobs:
 
       - name: Run tests
         run: uv run pytest
+
+  # Docker isn't available on the machine this repo is normally developed
+  # on, so the container smoke test can't be run locally. It's excluded
+  # from the default (push/PR) run above -- GitHub-hosted runners ship
+  # Docker, so this job is the way to actually exercise it, on demand.
+  docker-smoke:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@ae62891fec2bb8e7d6c99fc78c9fec3a63790f8d # v10.0.0
+        with:
+          enable-cache: true
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: uv sync --locked
+
+      - name: Run container smoke test
+        run: uv run pytest -m docker --no-cov -v

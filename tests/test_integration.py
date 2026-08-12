@@ -6,6 +6,10 @@ middleware stack. The Oura API is stubbed via respx from the fixture corpus
 """
 
 import json
+import os
+import subprocess
+import time
+from pathlib import Path
 
 import httpx
 import pytest
@@ -13,6 +17,8 @@ import respx
 from starlette.testclient import TestClient
 
 from oura_mcp.server import create_app
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
 TOKEN = "test-mcp-auth-token"  # matches conftest's MCP_AUTH_TOKEN default
 INIT_PARAMS = {
@@ -240,3 +246,70 @@ def test_upstream_timeout_surfaces_explicitly(app):
             )
         )
     assert resp["result"]["isError"] is True
+
+
+# 13. Container smoke test: docker compose up with the mounted package, then
+# one real initialize against 127.0.0.1:8000. Confirms the Compose rewrite
+# (bind-mounting ./src instead of embedding via configs.content) actually
+# boots, and that the bind is loopback-only. Excluded from the default run
+# and from the network guard (see conftest.py) since it deliberately talks
+# to a real subprocess over real localhost sockets. A fake OURA_ACCESS_TOKEN
+# is fine here -- this test only proves the container boots and serves MCP
+# traffic, not that it can reach the real Oura API (that's covered, stubbed,
+# by test_health_authenticated_reports_oura_connectivity above).
+@pytest.mark.docker
+@pytest.mark.slow
+def test_container_smoke_docker_compose_up():
+    smoke_env = {
+        "OURA_ACCESS_TOKEN": "smoke-test-oura-token",
+        "MCP_AUTH_TOKEN": "smoke-test-mcp-token",
+    }
+    compose_env = {**os.environ, **smoke_env}
+
+    subprocess.run(
+        ["docker", "compose", "up", "-d", "--build"],
+        cwd=REPO_ROOT,
+        env=compose_env,
+        check=True,
+        timeout=180,
+    )
+    try:
+        deadline = time.time() + 180
+        last_error: Exception | None = None
+        healthy = False
+        while time.time() < deadline:
+            try:
+                resp = httpx.get("http://127.0.0.1:8000/health", timeout=5)
+                if resp.status_code == 200 and resp.json().get("status") == "ok":
+                    healthy = True
+                    break
+            except httpx.HTTPError as exc:
+                last_error = exc
+            time.sleep(2)
+        if not healthy:
+            logs = subprocess.run(
+                ["docker", "compose", "logs"], cwd=REPO_ROOT, env=compose_env, capture_output=True, text=True
+            )
+            pytest.fail(f"container did not become healthy in time (last error: {last_error})\n{logs.stdout}")
+
+        resp = httpx.post(
+            "http://127.0.0.1:8000/mcp/smoke-test-mcp-token",
+            json=_rpc("initialize", INIT_PARAMS),
+            headers={"Content-Type": "application/json", "Accept": "application/json, text/event-stream"},
+            timeout=10,
+        )
+        assert resp.status_code == 200
+        assert _sse_json(resp)["result"]["serverInfo"]["name"] == "oura"
+
+        # 3a: the published port must be loopback-only, not every interface.
+        port_output = subprocess.run(
+            ["docker", "compose", "port", "oura-mcp", "8000"],
+            cwd=REPO_ROOT,
+            env=compose_env,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+        assert port_output.startswith("127.0.0.1:"), f"expected loopback-only bind, got {port_output!r}"
+    finally:
+        subprocess.run(["docker", "compose", "down", "-v"], cwd=REPO_ROOT, env=compose_env, timeout=60)
